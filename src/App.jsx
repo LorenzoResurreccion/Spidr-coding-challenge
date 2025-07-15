@@ -16,16 +16,23 @@ function App() {
     const { name, value } = e.target;
 
     let newValue = value;
-    
-    
 
     if (name === "spidrPin") {
+      //adjust new value
+      if (newValue.length <= formData.spidrPin.length || newValue.length > 19) {
+        newValue = formData.spidrPin.slice(0, newValue.length)
+      } else {
+        newValue = formData.spidrPin + newValue.slice(formData.spidrPin.length, newValue.length)
+      }
+      
       // Remove non-digit characters
-      newValue = value.replace(/[^\d]/g, "").slice(0, 16);
+      newValue = newValue.replace(/[^\d]/g, "").slice(0, 16);
 
       // Add dashes
       newValue = newValue.replace(/(.{4})/g, "$1-").slice(0, 19);
+      
       if (newValue.endsWith("-")) newValue = newValue.slice(0, -1);
+      
     }
 
     setFormData({
@@ -44,7 +51,7 @@ function App() {
       return;
     }
 
-    //prit info
+    //print info
     console.log("Form Submitted:", formData);
 
     //reset input fields
@@ -57,6 +64,12 @@ function App() {
       spidrPin: "",
     })
   };
+
+
+  //masks pin
+  function hidePin(pin) {
+    return pin.replace(/\d/g, '#');
+  }
 
   return (
     <div className="form-container" >
@@ -123,8 +136,8 @@ function App() {
           className='input-field'
           name="spidrPin"
           placeholder="####-####-####-####"
-          value={formData.spidrPin}
-          type='password'
+          value={hidePin(formData.spidrPin)}
+          
           onChange={handleChange}
           required
         />
