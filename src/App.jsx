@@ -8,7 +8,7 @@ function App() {
     phone: "",
     email: "",
     guessCost: "",
-    spidrPin: ""
+    spidrPin: "",
   })
 
 
@@ -16,10 +16,13 @@ function App() {
     const { name, value } = e.target;
 
     let newValue = value;
+    
+    
 
     if (name === "spidrPin") {
       // Remove non-digit characters
       newValue = value.replace(/[^\d]/g, "").slice(0, 16);
+
       // Add dashes
       newValue = newValue.replace(/(.{4})/g, "$1-").slice(0, 19);
       if (newValue.endsWith("-")) newValue = newValue.slice(0, -1);
@@ -51,7 +54,7 @@ function App() {
       phone: "",
       email: "",
       guessCost: "",
-      spidrPin: ""
+      spidrPin: "",
     })
   };
 
@@ -120,8 +123,8 @@ function App() {
           className='input-field'
           name="spidrPin"
           placeholder="####-####-####-####"
-          type='password'
           value={formData.spidrPin}
+          type='password'
           onChange={handleChange}
           required
         />
