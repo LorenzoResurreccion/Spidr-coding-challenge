@@ -124,7 +124,7 @@ function App() {
         <input 
           className='input-field'
           name="guessCost"
-          placeholder="Guess the air fryer’s cost ($)"
+          placeholder="Cost ($)"
           type="number"
           value={formData.guessCost}
           onChange={handleChange}
